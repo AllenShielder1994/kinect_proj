@@ -41,18 +41,7 @@ red = (0, 0, 255) #red
 blue = (255, 0, 0) #blue
 green = (0, 255, 0) #green
 
-# unit-----mm
-kinect_focallength=9
-dot_length=150
-
-def show_distance (per_length):
-
-        if per_length != 0:
-            distance=(dot_length*kinect_focallength) / per_length
-            print (distance)
-        else: 
-            print ("Nothing can be detected !")
-    
+   
 
 
 
@@ -107,7 +96,7 @@ while True:
             cv2.rectangle(newImg, (x,y), (x+w,y+h), green, 2) 
             if cv2.waitKey(1) & 0xFF == ord('Q'):
                 print(conts[i])
-                #show_distance(h)
+                
 
         cv2.imshow("img",newImg)
         #print (conts)
