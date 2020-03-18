@@ -7,24 +7,32 @@ import cv2
 from cv2 import cv2
 
 kinect = PyKinectRuntime.PyKinectRuntime(PyKinectV2.FrameSourceTypes_Color)
+
 #######################################################################
 #GREEN
-#lower_color=np.array([35,43,46])
-#upper_color=np.array([77,255,255])
+lower_color_G=np.array([35,43,46])
+upper_color_G=np.array([77,255,255])
 
 
 #YELLOW
-#lower_color=np.array([26,43,46])
-#upper_color=np.array([34,255,255])
+lower_color_Y=np.array([26,43,46])
+upper_color_Y=np.array([34,255,255])
 
 #RED
-lower_color=np.array([156,43,46])
-upper_color=np.array([180,255,255])
+lower_color_R=np.array([156,43,46])
+upper_color_R=np.array([180,255,255])
 
 #BLUE
-#lower_color=np.array([100,43,46])
-#upper_color=np.array([124,255,255])
+lower_color_B=np.array([100,43,46])
+upper_color_B=np.array([124,255,255])
+
+#Gitted_rid
+lower_color_R_g=np.array([171,126,130])
+upper_color_R_g=np.array([180,255,255])
+
 ######################################################################
+
+
 #point_color = (0, 0, 255) #red
 #point_color = (255, 0, 0) #blue
 point_color = (0, 255, 0) #green
@@ -33,13 +41,20 @@ red = (0, 0, 255) #red
 blue = (255, 0, 0) #blue
 green = (0, 255, 0) #green
 
-def show_distance (trgt_length,focallength,per_length):
+# unit-----mm
+kinect_focallength=9
+dot_length=150
+
+def show_distance (per_length):
+
+        if per_length != 0:
+            distance=(dot_length*kinect_focallength) / per_length
+            print (distance)
+        else: 
+            print ("Nothing can be detected !")
     
-    if per_length != 0:
-        distance=(trgt_length*focallength) / per_length
-        print (distance)
-    else: 
-        print ("no distance can be detacted")
+
+
 
 
 
@@ -60,19 +75,19 @@ while True:
         hsv = cv2.cvtColor(newImg, cv2.COLOR_BGR2HSV)
 
         # get mask
-        mask = cv2.inRange(hsv, lower_color, upper_color)
+        mask = cv2.inRange(hsv, lower_color_R_g, upper_color_R_g)
 
         
 
-        cv2.namedWindow("Mask")
+        #cv2.namedWindow("Mask")
 
 
         cv2.imshow('Mask', mask)
 
 
         # detect color
-        res = cv2.bitwise_and(newImg, newImg, mask=mask)
-        cv2.imshow('Result', res)
+        #res = cv2.bitwise_and(newImg, newImg, mask=mask)
+        #cv2.imshow('Result', res)
         
         
         #cv2.circle(newImg, positon, 60, point_color, 0)
@@ -90,17 +105,18 @@ while True:
         for i in range(0,len(conts)):  
             x, y, w, h = cv2.boundingRect(conts[i])   
             cv2.rectangle(newImg, (x,y), (x+w,y+h), green, 2) 
+            if cv2.waitKey(1) & 0xFF == ord('Q'):
+                print(conts[i])
+                #show_distance(h)
 
         cv2.imshow("img",newImg)
         #print (conts)
 
 
 
-
-    if cv2.waitKey(1) & 0xFF == ord('Q'):
-        break
-    if cv2.waitKey(1) & 0xFF == ord('q'):
-        break
+    if cv2.waitKey(1)&0xff == 27:
+        break 
+    
 
 
 # cv2.waitKey(0)
