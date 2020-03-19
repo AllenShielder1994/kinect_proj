@@ -6,13 +6,27 @@ import numpy as np
 import cv2
 from cv2 import cv2
 
-kinect = PyKinectRuntime.PyKinectRuntime(PyKinectV2.FrameSourceTypes_Color)
+
+###################################### HSV reference list ###################################### 
+
+#GREEN
+#lower_color_G=np.array([35,43,46])
+#upper_color_G=np.array([77,255,255])
 
 
+#YELLOW
+#lower_color_Y=np.array([26,43,46])
+#upper_color_Y=np.array([34,255,255])
 
-     
+#RED
+#lower_color_R=np.array([156,43,46])
+#upper_color_R=np.array([180,255,255])
 
+#BLUE
+#lower_color_B=np.array([100,43,46])
+#upper_color_B=np.array([124,255,255])
 
+############################################## END ##############################################  
 
 def nothing(x):
     pass
@@ -33,6 +47,7 @@ createbars()#创建六个滑块
 lower = np.array([0,0,0])#设置初始值
 upper = np.array([0,0,0])
 
+kinect = PyKinectRuntime.PyKinectRuntime(PyKinectV2.FrameSourceTypes_Color)
 
 while not kinect.has_new_color_frame():
     a = None

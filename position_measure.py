@@ -104,7 +104,7 @@ while True:
         correction_value =5
         
         if time <check_time:
-            #print (time)
+            #print (time) 
             x_colllect = x_colllect + x
             # print (x_colllect,x)
             time=time+1
@@ -125,7 +125,7 @@ while True:
         if key == ord ("Q"):
             if time <check_time:
                 #print (time)
-                x_colllect=x_colllect+x
+                x_colllect=x_colllect + x
                 # print (x_colllect,x)
                 time=time+1
 
